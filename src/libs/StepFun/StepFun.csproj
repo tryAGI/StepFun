@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget">
+    <Description>C# SDK for StepFun APIs, including chat completions, models, token counting, and text-to-speech.</Description>
+    <PackageTags>api;client;sdk;dotnet;openapi;stepfun;step;llm;ai;chat-completion;text-to-speech;voice</PackageTags>
+  </PropertyGroup>
+
+</Project>

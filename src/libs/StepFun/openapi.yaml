@@ -1,0 +1,378 @@
+openapi: 3.0.3
+info:
+  title: StepFun API
+  version: 1.0.0
+  description: Hand-maintained OpenAPI document for StepFun chat, model discovery, token counting, and text-to-speech APIs.
+servers:
+  - url: https://api.stepfun.ai/v1
+security:
+  - BearerAuth: []
+paths:
+  /chat/completions:
+    post:
+      operationId: createChatCompletion
+      tags:
+        - Chat
+      summary: Create a chat completion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionRequest"
+      responses:
+        "200":
+          description: Chat completion.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionResponse"
+  /models:
+    get:
+      operationId: listModels
+      tags:
+        - Models
+      summary: List models
+      responses:
+        "200":
+          description: Available models.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelListResponse"
+  /models/{model}:
+    get:
+      operationId: retrieveModel
+      tags:
+        - Models
+      summary: Retrieve a model
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Model metadata.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelObject"
+  /token/count:
+    post:
+      operationId: countTokens
+      tags:
+        - Tokens
+      summary: Count tokens for a conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenCountRequest"
+      responses:
+        "200":
+          description: Token count result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenCountResponse"
+  /audio/speech:
+    post:
+      operationId: createSpeech
+      tags:
+        - Audio
+      summary: Generate speech from text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpeechRequest"
+      responses:
+        "200":
+          description: Generated audio file or JSON URL response when return_url is true.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpeechResponse"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: StepFun API key
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      additionalProperties: true
+      required:
+        - model
+        - messages
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/Message"
+        tools:
+          type: array
+          items:
+            $ref: "#/components/schemas/Tool"
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+          format: float
+        top_p:
+          type: number
+          format: float
+        n:
+          type: integer
+        stream:
+          type: boolean
+        stop:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        frequency_penalty:
+          type: number
+          format: float
+        response_format:
+          $ref: "#/components/schemas/ResponseFormat"
+        reasoning_format:
+          type: object
+          additionalProperties: true
+    TokenCountRequest:
+      type: object
+      additionalProperties: true
+      required:
+        - model
+        - messages
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/Message"
+    TokenCountResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+          properties:
+            total_tokens:
+              type: integer
+    SpeechRequest:
+      type: object
+      additionalProperties: true
+      required:
+        - model
+        - input
+        - voice
+      properties:
+        model:
+          type: string
+          description: Supports step-tts-2, step-tts-mini, and stepaudio-2.5-tts.
+        input:
+          type: string
+        voice:
+          type: string
+        response_format:
+          type: string
+          enum:
+            - wav
+            - mp3
+            - flac
+            - opus
+            - pcm
+        speed:
+          type: number
+          format: float
+        volume:
+          type: number
+          format: float
+        instruction:
+          type: string
+        sample_rate:
+          type: integer
+        stream_format:
+          type: string
+          enum:
+            - audio
+            - sse
+        markdown_filter:
+          type: boolean
+        return_url:
+          type: boolean
+        voice_label:
+          type: object
+          additionalProperties: true
+        pronunciation_map:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    SpeechResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        url:
+          type: string
+        expires_at:
+          type: string
+    ModelListResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ModelObject"
+    ModelObject:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+          format: int64
+        owned_by:
+          type: string
+    Message:
+      type: object
+      additionalProperties: true
+      required:
+        - role
+      properties:
+        role:
+          type: string
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: "#/components/schemas/ContentPart"
+        tool_call_id:
+          type: string
+        tool_calls:
+          type: array
+          items:
+            $ref: "#/components/schemas/ToolCall"
+    ContentPart:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        image_url:
+          type: object
+          additionalProperties: true
+        video_url:
+          type: object
+          additionalProperties: true
+        input_audio:
+          type: object
+          additionalProperties: true
+    Tool:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+        function:
+          $ref: "#/components/schemas/FunctionDefinition"
+    FunctionDefinition:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parameters:
+          type: object
+          additionalProperties: true
+    ToolCall:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        function:
+          $ref: "#/components/schemas/FunctionCall"
+    FunctionCall:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        arguments:
+          type: string
+    ResponseFormat:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+    ChatCompletionResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+          format: int64
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: "#/components/schemas/Choice"
+        usage:
+          $ref: "#/components/schemas/Usage"
+    Choice:
+      type: object
+      additionalProperties: true
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: "#/components/schemas/Message"
+        delta:
+          $ref: "#/components/schemas/Message"
+        finish_reason:
+          type: string
+    Usage:
+      type: object
+      additionalProperties: true
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
