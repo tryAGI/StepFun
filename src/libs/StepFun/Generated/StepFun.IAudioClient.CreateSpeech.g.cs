@@ -19,6 +19,18 @@ namespace StepFun
         /// <summary>
         /// Generate speech from text
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::StepFun.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::StepFun.AutoSDKHttpResponse<global::StepFun.SpeechResponse>> CreateSpeechAsResponseAsync(
+
+            global::StepFun.SpeechRequest request,
+            global::StepFun.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Generate speech from text
+        /// </summary>
         /// <param name="model">
         /// Supports step-tts-2, step-tts-mini, and stepaudio-2.5-tts.
         /// </param>

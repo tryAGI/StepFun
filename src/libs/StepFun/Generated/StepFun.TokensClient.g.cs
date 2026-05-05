@@ -72,10 +72,10 @@ namespace StepFun
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public TokensClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::StepFun.EndPointAuthorization>? authorizations = null,
-            global::StepFun.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::StepFun.EndPointAuthorization>? authorizations,
+            global::StepFun.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 
