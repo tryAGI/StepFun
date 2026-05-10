@@ -50,5 +50,6 @@ namespace StepFun
         public TokenCountRequest()
         {
         }
+
     }
 }

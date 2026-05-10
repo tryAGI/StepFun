@@ -66,5 +66,6 @@ namespace StepFun
         public Choice()
         {
         }
+
     }
 }
