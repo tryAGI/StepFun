@@ -68,5 +68,6 @@ namespace StepFun
         public Message()
         {
         }
+
     }
 }

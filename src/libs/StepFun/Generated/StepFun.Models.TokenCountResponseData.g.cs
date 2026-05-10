@@ -39,5 +39,6 @@ namespace StepFun
         public TokenCountResponseData()
         {
         }
+
     }
 }

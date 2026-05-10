@@ -141,5 +141,6 @@ namespace StepFun
         public ChatCompletionRequest()
         {
         }
+
     }
 }
