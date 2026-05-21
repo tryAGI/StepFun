@@ -84,5 +84,6 @@ namespace StepFun
         public ChatCompletionResponse()
         {
         }
+
     }
 }
