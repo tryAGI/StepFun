@@ -124,7 +124,7 @@ namespace StepFun
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::StepFun.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

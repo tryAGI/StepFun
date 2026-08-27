@@ -4,7 +4,7 @@
 namespace StepFun
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ContentPartInputAudio
     {

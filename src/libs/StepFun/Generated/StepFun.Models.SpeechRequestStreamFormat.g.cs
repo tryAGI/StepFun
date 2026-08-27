@@ -4,16 +4,16 @@
 namespace StepFun
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum SpeechRequestStreamFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sse,
     }

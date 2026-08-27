@@ -4,32 +4,32 @@
 namespace StepFun
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class Message
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("role")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string Role { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("content")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::StepFun.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<global::StepFun.ContentPart>>))]
         public global::StepFun.OneOf<string, global::System.Collections.Generic.IList<global::StepFun.ContentPart>>? Content { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tool_call_id")]
         public string? ToolCallId { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tool_calls")]
         public global::System.Collections.Generic.IList<global::StepFun.ToolCall>? ToolCalls { get; set; }

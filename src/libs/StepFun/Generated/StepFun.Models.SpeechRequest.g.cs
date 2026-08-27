@@ -4,7 +4,7 @@
 namespace StepFun
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class SpeechRequest
     {
@@ -16,77 +16,77 @@ namespace StepFun
         public required string Model { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("input")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string Input { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voice")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string Voice { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("response_format")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::StepFun.JsonConverters.SpeechRequestResponseFormatJsonConverter))]
         public global::StepFun.SpeechRequestResponseFormat? ResponseFormat { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("speed")]
         public float? Speed { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("volume")]
         public float? Volume { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("instruction")]
         public string? Instruction { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("sample_rate")]
         public int? SampleRate { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("stream_format")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::StepFun.JsonConverters.SpeechRequestStreamFormatJsonConverter))]
         public global::StepFun.SpeechRequestStreamFormat? StreamFormat { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("markdown_filter")]
         public bool? MarkdownFilter { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("return_url")]
         public bool? ReturnUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("voice_label")]
         public object? VoiceLabel { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("pronunciation_map")]
         public global::System.Collections.Generic.IList<object>? PronunciationMap { get; set; }
